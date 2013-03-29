@@ -1,0 +1,32 @@
+- intro
+- how to set up hubot
+  - prerequisites
+    - node (use brew thx)
+    - heroku
+  - npm install -g hubot
+  - hubot -c airbot
+  - cd airbot
+  - chmod +x bin/hubot
+  - bin/hubot
+  - hubot ping
+- brief coffeescript example
+  - syntax
+- hubot overview
+  - structure
+  - scripts
+  - hubot-scripts example
+    - add hubot-scripts file with clark
+- deploying to heroku
+  - config (name, etc)
+- hubot message API
+  - take in a message
+  - respond vs hear
+  - spit out a message
+- hubot persistance API
+  - save data
+  - retrieve data
+  - in-memory vs redis vs mongo
+- hubot HTTP listener
+  - say things when you post to it
+- hubot event API
+  - send messages between scripts for fun

@@ -1,0 +1,11 @@
+.intro .state-background,
+.intro .state-background {
+  background: url('../img/hubot.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.state-background h1, .state-background p {
+  color: #fff;
+  text-shadow: none;
+}

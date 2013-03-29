@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>How to Hubot: A Look Inside Our Robot Friend</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css"/ >
+    <link rel="stylesheet" href="css/states.css" />
+    <link rel="stylesheet" href="lib/css/pojoaque.css">
+    <link rel="stylesheet" href="css/theme/monorail.css" id="theme" />
+
+    <!-- For syntax highlighting -->
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+      </script>
+
+      <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+      <![endif]-->
+    </head>
+
+    <body>
+
+      <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+          <section data-state="intro">
+            <h1>How to Hubot</h1>
+            <h3>A Look Inside Our Robot Friend</h3>
+          </section>
+
+          <section>
+            <ol>
+              <li>How to set up hubot</li>
+              <li>Coffeescript Primer</li>
+              <li>Hubot Overview</li>
+              <li>APIs</li>
+              <li>Deploying Hubot</li>
+            </ol>
+          </section>
+
+          <section>
+            <h2>Prerequisites</h2>
+            <p>Install Node</p>
+            <pre><code>brew install node</code></pre>
+            <p>Install Hubot</p>
+            <pre><code>npm install -g hubot</code></pre>
+            <p>An <a href="http://www.heroku.com" target="_blank">Heroku</a> account is suggested.</p>
+          </section>
+
+          <section>
+            <h2>Find a Nice Home</h2>
+            <p><code>cd</code> to directory of choice</p>
+            <pre><code>hubot -c airbot</code></pre>
+            <pre><code>cd airbot</code></pre>
+            <pre><code>chmod +x bin/hubot</code></pre>
+          </section>
+
+          <section>
+            <h2>Hello World</h2>
+            <pre><code>bin/hubot</code></pre>
+            <pre><code>hubot ping</code></pre>
+          </section>
+
+          <section>
+            <h2>A Brief Diversion into Coffeescript</h2>
+          </section>
+
+          <section>
+            <pre><code class="coffeescript">introMessage = (user) ->
+    if user?.name? and user?.hobby?
+      "hello, I am #{response.name}" +
+                "a #{response.hobby}ist."
+    else
+      message = "Please tell me more about yourself."
+
+    message
+
+me =
+  name: "Jack"
+  hobby: "Hubot curation"
+
+introMessage(me)
+</code></pre>
+          </section>
+
+          <section>
+            <h2>A Less Contrived Real Script Example</h2>
+          </section>
+
+          <section>
+            <pre><code class="coffeescript">goodbye = (name) ->
+  index = parseInt((Math.random() * goodbyes.length) >> 0)
+  message = goodbyes[index]
+  message.replace(/{name}/, name);
+
+goodbyes = [
+  "Bye, {name}.",
+  "Later, {name}.",
+  "Take care, {name}."
+]
+
+module.exports = (robot) ->
+  robot.hear /(bye|later|see y(ou|a)|take care),?\s(.*)/i, (msg) ->
+    if robot.name.toLowerCase() == msg.match[3].toLowerCase()
+      msg.send(goodbye(msg.message.user.name))
+            </code></pre>
+          </section>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+          // Full list of configuration options available here:
+          // https://github.com/hakimel/reveal.js#configuration
+          Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            theme: 'monorail',
+            transition: 'none',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+              // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+              // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
