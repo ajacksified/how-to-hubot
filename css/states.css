@@ -1,9 +1,34 @@
-.intro .state-background,
-.intro .state-background {
-  background: url('../img/hubot.jpg');
-  background-size: 100% 100%;
+.reveal .state-background {
+  background-size: auto 100%;
   background-repeat: no-repeat;
+  background-position: center center;
 }
+
+.intro .state-background {
+  background-image: url('../img/hubot.jpg');
+  background-color: #000;
+}
+
+.meet .state-background {
+  background-image: url('../img/meetHubot.jpg');
+  background-color: #000;
+}
+
+.bombed .state-background {
+  background-image: url('../img/bombed.png');
+  background-color: #000;
+}
+
+.kitchen .state-background {
+  background-image: url('../img/kitchen.jpg');
+  background-color: #000;
+}
+
+.outerSpace .state-background {
+  background-image: url('../img/outerSpace.png');
+  background-color: #000;
+}
+
 
 .state-background h1, .state-background p {
   color: #fff;

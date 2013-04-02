@@ -37,41 +37,46 @@
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
           <section data-state="intro">
-            <h1>How to Hubot</h1>
+          </section>
+
+          <section>
+            <h1>Hubot</h1>
             <h3>A Look Inside Our Robot Friend</h3>
           </section>
 
           <section>
             <ol>
-              <li>How to set up hubot</li>
+              <li>Setting Up Hubot</li>
               <li>Coffeescript Primer</li>
               <li>Hubot Overview</li>
               <li>APIs</li>
-              <li>Deploying Hubot</li>
             </ol>
+          </section>
+
+          <section data-state="meet">
           </section>
 
           <section>
             <h2>Prerequisites</h2>
             <p>Install Node</p>
-            <pre><code>brew install node</code></pre>
+            <p><code>brew install node</code></p>
             <p>Install Hubot</p>
-            <pre><code>npm install -g hubot</code></pre>
+            <p><code>npm install -g hubot</code></p>
             <p>An <a href="http://www.heroku.com" target="_blank">Heroku</a> account is suggested.</p>
           </section>
 
           <section>
             <h2>Find a Nice Home</h2>
             <p><code>cd</code> to directory of choice</p>
-            <pre><code>hubot -c airbot</code></pre>
-            <pre><code>cd airbot</code></pre>
-            <pre><code>chmod +x bin/hubot</code></pre>
+            <p>run <code>hubot -c airbot</code> to generate a boilerplate</p>
+            <p><code>cd airbot</code></p>
+            <p><code>chmod +x bin/hubot</code></p>
           </section>
 
           <section>
             <h2>Hello World</h2>
-            <pre><code>bin/hubot</code></pre>
-            <pre><code>hubot ping</code></pre>
+            <p>run <code>bin/hubot</code></p>
+            <p>type <code>hubot ping</code> and hit enter</p>
           </section>
 
           <section>
@@ -79,44 +84,127 @@
           </section>
 
           <section>
-            <pre><code class="coffeescript">introMessage = (user) ->
+            <pre><code class="coffeescript"><span class="fragment">introMessage = (user) -></span><span class="fragment">
     if user?.name? and user?.hobby?
       "hello, I am #{response.name}" +
                 "a #{response.hobby}ist."
     else
-      message = "Please tell me more about yourself."
+      message = "Please tell me more about yourself."<span class="fragment">
 
-    message
+    message</span>
 
-me =
+<span class="fragment">me =
   name: "Jack"
-  hobby: "Hubot curation"
+  hobby: "Hubot curation"</span>
 
-introMessage(me)
+<span class="fragment">console.log introMessage(me)</span>
 </code></pre>
           </section>
 
           <section>
-            <h2>A Less Contrived Real Script Example</h2>
+            <h2>Hubot Structure</h2>
+            <ul>
+              <li><code>Procfile</code> (heroku startup script)</li>
+              <li><code>README.md</code></li>
+              <li><code>bin/</code> (contains hubot executable)</li>
+              <li><code>external-scripts.json</code> (list of packages from npm)</li>
+              <li><code>hubot-scripts.json</code> (list of packages from hubot-scripts)</li>
+              <li><code>package.json</code> (node package manager metainformation)</li>
+              <li><code>scripts/</code> (custom hubot script directory)</li>
+            </ul>
           </section>
 
           <section>
-            <pre><code class="coffeescript">goodbye = (name) ->
-  index = parseInt((Math.random() * goodbyes.length) >> 0)
-  message = goodbyes[index]
-  message.replace(/{name}/, name);
+            <h2>A Hubot Script Example</h2>
+            <h3>create and edit <code>scripts/goodbye.coffee</code></h3>
+          </section>
 
+          <section>
+            <pre><code class="coffeescript"><span class="fragment" data-fragment-index="8">
 goodbyes = [
   "Bye, {name}.",
   "Later, {name}.",
   "Take care, {name}."
 ]
 
-module.exports = (robot) ->
-  robot.hear /(bye|later|see y(ou|a)|take care),?\s(.*)/i, (msg) ->
-    if robot.name.toLowerCase() == msg.match[3].toLowerCase()
-      msg.send(goodbye(msg.message.user.name))
+goodbye = (name) ->
+  index = parseInt(Math.random() * goodbyes.length)
+  message = goodbyes[index]
+  message.replace(/{name}/, name);
+</span>
+<span class="fragment" data-fragment-index="1">module.exports =</span><span class="fragment" data-fragment-index="2"> (robot) -></span>
+  <span class="fragment" data-fragment-index="3">robot.hear</span><span class="fragment" data-fragment-index="4"> /(bye|later),?\s(.*)/i</span><span class="fragment" data-fragment-index="4">, (msg) -></span>
+    <span class="fragment" data-fragment-index="6">if robot.name.toLowerCase() == msg.match[2].toLowerCase()</span>
+      <span class="fragment" data-fragment-index="7">byeMessage = goodbye(msg.message.user.name)
+      msg.send(byeMessage)</span>
             </code></pre>
+          </section>
+
+          <section data-state="bombed">
+          </section>
+
+          <section>
+            <p><code>bin/hubot</code></p>
+            <p><code>goodbye Hubot</code></p>
+            <p><code>later, Hubot</code></p>
+          </section>
+
+          <section>
+            <h2>hubot-scripts</h2>
+            <h5>github.com/github/hubot-scripts</h5>
+            <p>edit <code>hubot-scripts.json</code></p>
+            <p>add <code>"clark.coffee"</code></p>
+            <p>run <code>bin/hubot</code></p>
+            <p><code>hubot clark 1 2 3 4 5</code></p>
+          </section>
+
+          <section data-state="kitchen">
+          </section>
+
+          <section>
+            <h2>hubot persistance</h2>
+            <p>simple storage through <code>hubot.brain</code></p>
+            <p>overloaded by redis-brain, mongo-brain, etc.</p>
+          </section>
+
+          <section>
+            <p>You can save any arbitrary data in the brain.</p>
+            <pre><code class="coffeescript"><span class="fragment">robot.brain.on 'loaded', -></span>
+  robot.brain.lastAccessed = new Date()
+  robot.brain.seagulls = 12
+  robot.brain.flowers = { pansies: true, daffodils: false }
+
+  robot.brain.emit 'save'
+</code></pre>
+          </section>
+
+          <section>
+            <h2>hubot http listener</h2>
+            <h3>create and edit <code>scripts/say.coffee</code></h3>
+          </section>
+
+          <section><pre><code>querystring = require('querystring')
+
+module.exports = (robot) ->
+  robot.router.get "/hubot/say", (req, res) ->
+    query = querystring.parse(req._parsedUrl.query)
+    message = query.message
+
+    user = {}
+    user.room = query.room if query.room
+
+    robot.send(user, message)
+    res.end "said #{message}"</code></pre>
+          </section>
+
+          <section>
+            <p>edit <code>package.json</code> to include<br /><code>"querystring": ">= 0.1.0"</code> in the dependencies</p>
+            <p>run <code>npm install</code></p>
+            <p>run <code>bin/hubot</code></p>
+            <p>visit <code>localhost:8080/say?message=hello</code></p>
+          </section>
+
+          <section data-state="outerSpace">
           </section>
         </div>
 
