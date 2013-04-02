@@ -34,3 +34,7 @@
   color: #fff;
   text-shadow: none;
 }
+
+.highlight-green.visible{
+  outline: solid 1px #17ff2e;
+}

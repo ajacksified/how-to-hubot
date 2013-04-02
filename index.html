@@ -86,7 +86,7 @@
           <section>
             <pre><code class="coffeescript"><span class="fragment">introMessage = (user) -></span><span class="fragment">
     if user?.name? and user?.hobby?
-      "hello, I am #{response.name}" +
+      "hello, I am #{response.name}, " +
                 "a #{response.hobby}ist."
     else
       message = "Please tell me more about yourself."<span class="fragment">
@@ -98,6 +98,8 @@
   hobby: "Hubot curation"</span>
 
 <span class="fragment">console.log introMessage(me)</span>
+
+<span class="fragment">#hello, I am Jack, a Hubot curationist</span>
 </code></pre>
           </section>
 
@@ -144,18 +146,40 @@ goodbye = (name) ->
           </section>
 
           <section>
-            <p><code>bin/hubot</code></p>
-            <p><code>goodbye Hubot</code></p>
-            <p><code>later, Hubot</code></p>
+            <p>run <code>bin/hubot</code> again</p>
+            <p>say <code>goodbye Hubot</code></p>
+            <p>say <code>later, Hubot</code></p>
           </section>
 
           <section>
             <h2>hubot-scripts</h2>
             <h5>github.com/github/hubot-scripts</h5>
+            <p>hubot will automatically download and keep up-to-date any hubot-scripts you add</p>
+          </section>
+
+          <section>
+            <p>make sure to copy dependencies from the hubot-script into your package.json</p>
+            <pre><code class="coffeescript"># Description:
+#   None
+#
+<span class="fragment highlight-green"># Dependencies:
+#   "clark": "0.0.5"</span>
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   hubot clark &lt;data&gt; - build sparklines out of data
+#
+# Author:
+#   ajacksified</code></pre>
+          </section>
+
+          <section>
             <p>edit <code>hubot-scripts.json</code></p>
             <p>add <code>"clark.coffee"</code></p>
             <p>run <code>bin/hubot</code></p>
-            <p><code>hubot clark 1 2 3 4 5</code></p>
+            <p>say <code>hubot clark 1 2 3 4 5</code></p>
           </section>
 
           <section data-state="kitchen">
@@ -165,16 +189,22 @@ goodbye = (name) ->
             <h2>hubot persistance</h2>
             <p>simple storage through <code>hubot.brain</code></p>
             <p>overloaded by redis-brain, mongo-brain, etc.</p>
+            <p>(you can find these in hubot-scripts or write your own)</p>
           </section>
 
           <section>
             <p>You can save any arbitrary data in the brain.</p>
-            <pre><code class="coffeescript"><span class="fragment">robot.brain.on 'loaded', -></span>
+            <pre><code class="coffeescript"><span class="fragment" data-fragment-index="2"># you may want to wait until the brain has been initialized
+# and there is a database connection
+robot.brain.on 'loaded', -></span>
   robot.brain.lastAccessed = new Date()
   robot.brain.seagulls = 12
   robot.brain.flowers = { pansies: true, daffodils: false }
 
+<span class="fragment" data-fragment-index="1">
+  # hubot brain runs on events
   robot.brain.emit 'save'
+</span>
 </code></pre>
           </section>
 
