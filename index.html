@@ -62,7 +62,7 @@
             <p><code>brew install node</code></p>
             <p>Install Hubot</p>
             <p><code>npm install -g hubot</code></p>
-            <p>An <a href="http://www.heroku.com" target="_blank">Heroku</a> account is suggested.</p>
+            <p>An <a href="http://www.Heroku.com" target="_blank">Heroku</a> account is suggested.</p>
           </section>
 
           <section>
@@ -106,7 +106,7 @@
           <section>
             <h2>Hubot Structure</h2>
             <ul>
-              <li><code>Procfile</code> (heroku startup script)</li>
+              <li><code>Procfile</code> (Heroku startup script)</li>
               <li><code>README.md</code></li>
               <li><code>bin/</code> (contains hubot executable)</li>
               <li><code>external-scripts.json</code> (list of packages from npm)</li>
@@ -233,6 +233,23 @@ module.exports = (robot) ->
             <p>run <code>npm install</code></p>
             <p>run <code>bin/hubot</code></p>
             <p>visit <code>localhost:8080/say?message=hello</code></p>
+          </section>
+
+          <section>
+            <h2>Deployment</h2>
+            <p>99 times out of 100, you'll probably just deploy to Heroku</p>
+            <p><code>hubot -c</code> creates a Heroku <code>Procfile</code> for you</p>
+            <p>run <code>Heroku create</code></p>
+            <p>deploy with <code>git push heroku master</code></p>
+            <p>start with <code>heroku ps:scale web=1</code></p>
+            <p>(you'll only have to run <code>ps:scale</code> this the first time)</p>
+          </section>
+
+          <section>
+            <h2>Chat Adapters</h2>
+            <p>Hubot ships with a Campfire adapter. You can get more from hubot-scripts.</p>
+            <p>Assuming Heroku deployment, run</p>
+            <p><code>Heroku config:add HUBOT_CAMPFIRE_TOKEN=secret HUBOT_CAMPFIRE_ROOMS=123,456 HUBOT_CAMPFIRE_ACCOUNT="hubot"</code></p>
           </section>
 
           <section data-state="outerSpace">
