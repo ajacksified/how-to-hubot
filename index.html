@@ -62,22 +62,31 @@
 
           <section>
             <h2>Prerequisites</h2>
-            <p>Install Node</p>
-            <p><code>brew install node</code></p>
-            <p>Install and run Redis</p>
-            <p>add <code>/usr/local/share/npm/bin</code> to your path</p>
-            <p>Install Hubot</p>
-            <p><code>npm install -g coffee-script</code></p>
-            <p><code>npm install -g hubot</code></p>
-            <p>An <a href="http://www.Heroku.com" target="_blank">Heroku</a> account is suggested.</p>
+            <h3>3 Easy Steps</h3>
+
+            <ol>
+              <li>
+                Install Node &amp; Redis <br />
+                (<code>brew install node redis</code>)
+              </li>
+              <li>Follow brew's instructions to run redis</li>
+              <li>
+                Install Hubot <br />
+                (<code>npm install -g hubot</code>)
+              </li>
+            </ol>
+
+            <p>
+              <em>An <a href="http://www.Heroku.com" target="_blank">Heroku</a> account is suggested.</em>
+            </p>
           </section>
 
           <section>
             <h2>Find a Nice Home</h2>
-            <p><code>cd</code> to directory of choice</p>
+            <p><code>cd</code> to your "projects" directory</p>
             <p>run <code>hubot -c airbot</code> to generate a boilerplate</p>
             <p><code>cd airbot</code></p>
-            <p><code>chmod +x bin/hubot</code></p>
+            <p><code>npm install</code></p>
           </section>
 
           <section>
@@ -156,17 +165,22 @@ goodbye = (name) ->
             <p>run <code>bin/hubot</code> again</p>
             <p>say <code>goodbye Hubot</code></p>
             <p>say <code>later, Hubot</code></p>
+            <p class="fragment">See? Regexes ARE fun!</p>
           </section>
 
           <section>
             <h2>hubot-scripts</h2>
-            <h5>github.com/github/hubot-scripts</h5>
+            <h5>
+              <a href="https://github.com/github/hubot-scripts">
+                github.com/github/hubot-scripts
+              </a>
+            </h5>
             <p>hubot will automatically download and keep up-to-date any hubot-scripts you add</p>
           </section>
 
           <section>
             <p>copy the dependencies from the hubot-script into your <code>package.json</code></p>
-            <p>from <a href="https://github.com/github/hubot-scripts/blob/master/src/scripts/clark.coffee">clark.coffee</a>:</p>
+            <p>an example from <a href="https://github.com/github/hubot-scripts/blob/master/src/scripts/clark.coffee">clark.coffee</a>:</p>
             <pre><code class="coffeescript"># Description:
 #   None
 #
@@ -181,6 +195,20 @@ goodbye = (name) ->
 #
 # Author:
 #   ajacksified</code></pre>
+          </section>
+
+          <section>
+            <p>Towards the bottom of <code>package.json</code>:</p>
+            <pre><code class="javsacript">{
+  /* ... snip ... */
+  "dependencies": {
+    "hubot": "2.6.1",
+    "hubot-scripts": "2.5.1",
+    "optparse": "1.0.4",
+    "underscore": "1.4.4",
+    <span class="fragment highlight-green">"clark": "0.0.6"</span>
+  }
+}</code></pre>
           </section>
 
           <section>
@@ -237,7 +265,7 @@ module.exports = (robot) ->
 
           <section>
             <p>edit <code>package.json</code> to include<br /><code>"querystring": ">= 0.1.0"</code> in the dependencies</p>
-            <p>run <code>npm install</code></p>
+            <p>run <code>npm install</code> to install the new dependency</p>
             <p>run <code>bin/hubot</code></p>
             <p>visit <code>localhost:8080/say?message=hello</code></p>
           </section>
@@ -245,7 +273,7 @@ module.exports = (robot) ->
           <section>
             <h2>Deployment</h2>
             <p>99 times out of 100, you'll probably just deploy to Heroku</p>
-            <p><code>hubot -c</code> creates a Heroku <code>Procfile</code> for you</p>
+            <p><code>hubot -c</code> created a Heroku <code>Procfile</code> for you</p>
             <p>run <code>Heroku create</code></p>
             <p>deploy with <code>git push heroku master</code></p>
             <p>start with <code>heroku ps:scale web=1</code></p>
@@ -256,7 +284,11 @@ module.exports = (robot) ->
             <h2>Chat Adapters</h2>
             <p>Hubot ships with a Campfire adapter. You can get more from hubot-scripts.</p>
             <p>Assuming Heroku deployment, run</p>
-            <p><code>Heroku config:add HUBOT_CAMPFIRE_TOKEN=secret HUBOT_CAMPFIRE_ROOMS=123,456 HUBOT_CAMPFIRE_ACCOUNT="hubot"</code></p>
+            <pre><code>Heroku config:add \
+HUBOT_CAMPFIRE_TOKEN=secret \
+HUBOT_CAMPFIRE_ROOMS=123,456 \
+HUBOT_CAMPFIRE_ACCOUNT="hubot"</code></pre>
+            <p>(replacing rooms with actual room ids from Campfire)</p>
           </section>
 
           <section data-state="outerSpace">
